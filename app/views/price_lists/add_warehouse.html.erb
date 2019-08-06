@@ -1,0 +1,72 @@
+<h1>Dodaj magazyn</h1>
+<table>
+  <tr><td>Nazwa dostawcy</td><td><input type="text"></td></tr>
+  <tr><td>Nazwa magazynu</td><td><input type="text"></td></tr>
+  <tr><td>Nazwa produktu</td><td><input type="text"></td></tr>
+  <tr><td>Cena brutto</td><td><input type="text"></td></tr>
+  <tr><td>Transport suma 24 PAL</td><td><input type="text"></td></tr>
+  <tr><td>Cena pelletu na tonę</td><td><input type="text"></td></tr>
+  <tr><td>Cena worka</td><td><input type="text"></td></tr>
+  <tr><td>Opłata paleta</td><td><input type="text"></td></tr>
+  <tr><td>Opłata zamówienie</td><td><input type="text"></td></tr>
+</table>
+
+<%= link_to "Dodaj strefe", "add_warehouse" %>
+
+<h3>Numer strefy</h3>
+<%= text_field :strefa, :number, size: 20  %>
+<h3>Kody pocztowe(odzielone średnikiem)</h3>
+<%= text_area :codes, :post_codes, size: "50x20" %>
+<table>
+  <tr><th>Ilość palet</th><th>Rabat netto</th><th>Logistyka netto</th><th>Cena brutto</th><th>Cena brutto 1 tona</th><th>Transport dla klienta</th></tr>
+<tr>
+    <td>1</td>
+    <td><%= text_field :rabat, :one_pallet, :placeholder => "00.00", id: "strefa_one" %></td>
+    <td><%= text_field :logistic, :one_pallet, :placeholder => "00.00", id: "strefa_one"%></td>
+    <td>200.34</td>
+    <td>2003.40</td>
+    <td>53.43</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><%= text_field :rabat, :two_pallet, :placeholder => "00.00" %></td>
+    <td><%= text_field :logistic, :two_pallet, :placeholder => "00.00" %></td>
+    <td>200.34</td>
+    <td>2003.40</td>
+    <td>53.43</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><%= text_field :rabat, :three_pallet, :placeholder => "00.00" %></td>
+    <td><%= text_field :logistic, :three_pallet, :placeholder => "00.00" %></td>
+    <td>200.34</td>
+    <td>2003.40</td>
+    <td>53.43</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td><%= text_field :rabat, :four_pallet, :placeholder => "00.00" %></td>
+    <td><%= text_field :logistic, :four_pallet, :placeholder => "00.00" %></td>
+    <td>200.34</td>
+    <td>2003.40</td>
+    <td>53.43</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><%= text_field :rabat, :five_pallet, :placeholder => "00.00" %></td>
+    <td><%= text_field :logistic, :five_pallet, :placeholder => "00.00" %></td>
+    <td>200.34</td>
+    <td>2003.40</td>
+    <td>53.43</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td><%= text_field :rabat, :six_pallet, :placeholder => "00.00" %></td>
+    <td><%= text_field :logistic, :six_pallet, :placeholder => "00.00" %></td>
+    <td>200.34</td>
+    <td>2003.40</td>
+    <td>53.43</td>
+  </tr>
+</table>
+
+<%= link_to "Dodaj", "add_warehouse" %>
