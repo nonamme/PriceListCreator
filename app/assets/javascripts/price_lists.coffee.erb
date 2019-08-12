@@ -2,7 +2,7 @@ areaStructure = "<h3>Numer strefy</h3>
 <input type='text'>
 <h3>Kody pocztowe(odzielone średnikiem)</h3> 
 <input type='text'>
-<table>
+<table id='area' class='area_number'>
 <tr><th>Ilość palet</th><th>Rabat netto</th><th>Logistyka netto</th><th>Cena brutto</th><th>Cena brutto 1 tona</th><th>Transport dla klienta</th></tr>
 <tr>
 <td>1</td>
@@ -54,10 +54,11 @@ areaStructure = "<h3>Numer strefy</h3>
 </tr>
 </table>
 "
-
 areas = document.querySelector("#areas")
 add_area_button = document.querySelector("#add_area")
+area_id = 0
 
 add_area_button.addEventListener('click', (event) ->
-  areas.insertAdjacentHTML("beforeend", areaStructure)
+  area_id++
+  areas.insertAdjacentHTML("afterBegin", areaStructure.replace("area_number", "area_" + area_id))
 )
