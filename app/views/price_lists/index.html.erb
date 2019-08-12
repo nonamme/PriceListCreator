@@ -5,21 +5,23 @@
     <title>Price Lists</title>
 </head>
 <body>
+<h1>Wyszukaj magazyn</h1>
+<table id="search">
+  <tr><th>Produkt</th><th>Kod pocztowy</th><th>Ilość palet</th></tr>
+  <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+</table>
+
 <h1>Price List</h1>
 <%= link_to "Dodaj magazyn", price_list_add_warehouse_path %>
 <br>
 <br>
-<table>
-  <tr><th>Warehouse</th><th>Product</th></tr>
-  <tr><td>German Warehouse</td><td>Product 1</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
-  <tr><td>German Warehouse</td><td>Product 2</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
-  <tr><td>German Warehouse 2</td><td>Product 1</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
-  <tr><td>Austria Warehouse</td><td>Product 1</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
+<table id="warehouses">
+  <tr><th>Warehouse</th><th>Product</th><th>Cena brutto</th><th>Cena brutto 1 tona</th><th>Transport dla klienta</th></tr>
+  <tr><td>German Warehouse</td><td>Product 1</td><td>German Warehouse</td><td>German Warehouse</td><td>German Warehouse</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
+  <tr><td>German Warehouse</td><td>Product 2</td><td>German Warehouse</td><td>German Warehouse</td><td>German Warehouse</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
+  <tr><td>German Warehouse 2</td><td>Product 1</td><td>German Warehouse 2</td><td>German Warehouse 2</td><td>German Warehouse 2</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
+  <tr><td>Austria Warehouse</td><td>Product 1</td><td>Austria Warehouse</td><td>Austria Warehouse</td><td>Austria Warehouse</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
 </table>
-<h1>Wyszukaj</h1>
-<table>
-  <tr><th>Produkt</th><th>Kod pocztowy</th><th>Ilość palet</th></tr>
-  <tr><th><input type="text"></th><th><input type="text"></th><th><input type="text"></th></tr>
-</table>
+
 </body>
 </html>
