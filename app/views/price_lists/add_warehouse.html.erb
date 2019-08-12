@@ -1,14 +1,8 @@
 <h1>Dodaj magazyn</h1>
-<table>
-  <tr><td>Nazwa dostawcy</td><td><input type="text"></td></tr>
-  <tr><td>Nazwa magazynu</td><td><input type="text"></td></tr>
-  <tr><td>Nazwa produktu</td><td><input type="text"></td></tr>
-  <tr><td>Cena brutto</td><td><input type="text"></td></tr>
-  <tr><td>Transport suma 24 PAL</td><td><input type="text"></td></tr>
-  <tr><td>Cena pelletu na tonę</td><td><input type="text"></td></tr>
-  <tr><td>Cena worka</td><td><input type="text"></td></tr>
-  <tr><td>Opłata paleta</td><td><input type="text"></td></tr>
-  <tr><td>Opłata zamówienie</td><td><input type="text"></td></tr>
+<table id="warehouse_details">
+  <tr><td>Nazwa dostawcy</td><td><input type="text"></td><td>Cena brutto</td><td><input type="text"></td><td>Opłata paleta</td><td><input type="text"></td></tr>
+  <tr><td>Nazwa magazynu</td><td><input type="text"></td><td>Transport suma 24 PAL</td><td><input type="text"></td><td>Opłata zamówienie</td><td><input type="text"></td></tr>
+  <tr><td>Nazwa produktu</td><td><input type="text"></td><td>Cena pelletu na tonę</td><td><input type="text"></td><td>Cena worka</td><td><input type="text"></td></tr>
 </table>
 
 <%= button_tag "Dodaj strefe", :id => :add_area, type: "button" %>
