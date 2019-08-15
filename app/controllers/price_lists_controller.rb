@@ -1,6 +1,6 @@
 class PriceListsController < ApplicationController
   def index
-    @name = "Price List controller"
+    @warehouses = Warehouse.all
   end
 
   def addWarehouse
