@@ -7,8 +7,22 @@
 <body>
 <h1>Wyszukaj magazyn</h1>
 <table id="search">
-  <tr><th>Produkt</th><th>Kod pocztowy</th><th>Ilość palet</th></tr>
-  <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+  <tr>
+    <th>Produkt</th>
+    <th>Kod pocztowy</th>
+    <th>Ilość palet</th>
+  </tr>
+  <tr>
+    <td>
+      <input id="product_name" type="text">
+    </td>
+    <td>
+      <input id="post_code" type="text">
+    </td>
+    <td>
+      <input id="number_of_pallete" type="text">
+    </td>
+  </tr>
 </table>
 
 <h1>Price List</h1>
@@ -17,10 +31,17 @@
 <br>
 <table id="warehouses">
   <tr><th>Warehouse</th><th>Product</th><th>Cena brutto</th><th>Cena brutto 1 tona</th><th>Transport dla klienta</th></tr>
-  <tr><td>German Warehouse</td><td>Product 1</td><td>German Warehouse</td><td>German Warehouse</td><td>German Warehouse</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
-  <tr><td>German Warehouse</td><td>Product 2</td><td>German Warehouse</td><td>German Warehouse</td><td>German Warehouse</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
-  <tr><td>German Warehouse 2</td><td>Product 1</td><td>German Warehouse 2</td><td>German Warehouse 2</td><td>German Warehouse 2</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
-  <tr><td>Austria Warehouse</td><td>Product 1</td><td>Austria Warehouse</td><td>Austria Warehouse</td><td>Austria Warehouse</td><td><button>Edytuj</button></td><td><button>Usuń</button></td></tr>
+  <% @warehouses.each do |warehouse| %>
+    <tr>
+      <td><%= warehouse.warehouse_name %></td>
+      <td><%= warehouse.product %></td>
+      <td><%= warehouse.warehouse_detail.gross_price %></td>
+      <td><%= warehouse.warehouse_detail.price_pellete_per_tone %></td>
+      <td><%= warehouse.warehouse_detail.order_price %></td>
+      <td><%= link_to "Edytuj", root_path %></td>
+      <td><%= link_to "Usun", warehouse_destroy_path(warehouse.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+    </tr>
+  <% end %>
 </table>
 
 </body>
