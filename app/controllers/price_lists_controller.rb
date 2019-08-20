@@ -1,6 +1,6 @@
 class PriceListsController < ApplicationController
   def index
-    @warehouses = Warehouse.all
+    @all_warehouses = Warehouse.all
   end
 
   def addWarehouse
