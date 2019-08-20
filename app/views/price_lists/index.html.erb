@@ -1,48 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Price Lists</title>
-</head>
-<body>
-<h1>Wyszukaj magazyn</h1>
-<table id="search">
-  <tr>
-    <th>Produkt</th>
-    <th>Kod pocztowy</th>
-    <th>Ilość palet</th>
-  </tr>
-  <tr>
-    <td>
-      <input id="product_name" type="text">
-    </td>
-    <td>
-      <input id="post_code" type="text">
-    </td>
-    <td>
-      <input id="number_of_pallete" type="text">
-    </td>
-  </tr>
-</table>
+<%= tag.h1 do %>
+  Wyszukaj magazyn
+<% end %>
+
+<%= form_with(url: warehouse_search_path, method: "get",  :id => "search", local: true)  do %>
+    <%= tag.div class: "form_tag_container" do %>
+        <%= label :product, "Produkt" %>
+        <%= text_field_tag :product %>
+    <% end %>
+    <%= tag.div class: "form_tag_container" do %>
+      <%= label :postcode, "Kod pocztowy" %>
+      <%= text_field_tag :postcode %>
+    <% end %>
+    <%= tag.div class: "form_tag_container" do %>
+      <%= label :number_of_palette, "Ilosc palet" %>
+      <%= text_field_tag :number_of_palette %>
+    <% end %>
+  <%= submit_tag "Search" %>
+<% end %>
 
 <h1>Price List</h1>
 <%= link_to "Dodaj magazyn", price_list_add_warehouse_path %>
 <br>
 <br>
-<table id="warehouses">
-  <tr><th>Warehouse</th><th>Product</th><th>Cena brutto</th><th>Cena brutto 1 tona</th><th>Transport dla klienta</th></tr>
-  <% @warehouses.each do |warehouse| %>
-    <tr>
-      <td><%= warehouse.warehouse_name %></td>
-      <td><%= warehouse.product %></td>
-      <td><%= warehouse.warehouse_detail.gross_price %></td>
-      <td><%= warehouse.warehouse_detail.price_pellete_per_tone %></td>
-      <td><%= warehouse.warehouse_detail.order_price %></td>
-      <td><%= link_to "Edytuj", root_path %></td>
-      <td><%= link_to "Usun", warehouse_destroy_path(warehouse.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
-    </tr>
-  <% end %>
-</table>
-
-</body>
-</html>
+<%= render "partials/warehouse_table2" %>
