@@ -1,0 +1,45 @@
+<%= tag.h1 do %>
+  Wyszukaj magazyn
+<% end %>
+<% if @warehouse.class == NilClass %>
+<%  return flash[:error] = "No warehouse data to display." %>
+<% end %>
+<%= form_with(url: warehouse_search_path, method: "get",  :id => "search", local: true)  do %>
+    <%= tag.div class: "form_tag_container" do %>
+        <%= label :product, "Produkt" %>
+        <%= text_field_tag :product %>
+    <% end %>
+    <%= tag.div class: "form_tag_container" do %>
+      <%= label :postcode, "Kod pocztowy" %>
+      <%= text_field_tag :postcode %>
+    <% end %>
+    <%= tag.div class: "form_tag_container" do %>
+      <%= label :number_of_palette, "Ilosc palet" %>
+      <%= text_field_tag :number_of_palette %>
+    <% end %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<h1>Price List</h1>
+<%= link_to "Dodaj magazyn", price_list_add_warehouse_path %>
+<br>
+<br>
+<%= render "partials/warehouse_table" %>
+<table id="pricelist">
+    <tr>
+      <th scope="col">Cena brutto</th>
+      <th scope="col">Cena brutto za 1 tone</th>
+      <th scope="col">Transport dla klienta</th>
+    </tr>
+    <tr>
+      <td>
+        <%= @priceList.number_of_pallets %>
+      </td>
+      <td>
+        <%= @priceList.net_rabate %>
+      </td>
+      <td>
+        <%= @priceList.net_logistic %>
+      </td>
+    </tr>
+</table>
