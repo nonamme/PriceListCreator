@@ -1,4 +1,6 @@
 class WarehousesController < ApplicationController
+  include WarehousesHelper
+
   def delete
     warehouse = Warehouse.find(params[:id])
     warehouse.destroy
@@ -11,28 +13,41 @@ class WarehousesController < ApplicationController
         PriceList.where("area_id = #{area.id} and number_of_pallets = #{params[:number_of_palette]}").find_each do |priceList|
           puts "Warehouse  #{warehouse} Area: #{area} PriceList #{priceList}"
           @warehouse = warehouse
-          @area = area
-          @priceList = priceList
+          number_of_palettes = params[:number_of_palette]
+          @data = getComputedData priceList, warehouse, number_of_palettes
+
           respond_to do |format|
-            format.html do
-              # redirect_to warehouse_search_path
-              render "search"
-            end
-            format.json do
-              render json: {
-                  warehouse: warehouse,
-                  area: area,
-                  priceList: priceList
-              }
-            end
+            respondHtml format
+            respondJson format, { warehouse: warehouse, area: area, priceList: priceList }
           end
         end
       end
     end
   end
 
-  def pricing
-    # @warehouse
-    # render 'search'
+  def respondHtml(format)
+    format.html do
+      render "search"
+    end
+  end
+
+  def respondJson(format, **data)
+    format.json do
+      render json: {
+          warehouse: data[:warehouse],
+          area: data[:area],
+          priceList: data[:priceList]
+      }
+    end
+  end
+
+  def getComputedData(priceList, warehouse, number_of_palettes)
+    calculator = Calculator.new(priceList: priceList, warehouse: warehouse, number_of_palettes: number_of_palettes)
+    return {
+        gross_price: calculator.grossPrice.round(2),
+        gross_price_one_palette: calculator.grossPriceOnePalette.round(2),
+        transport_for_client: calculator.transportForClient.round(2)
+      }
   end
 end
+
