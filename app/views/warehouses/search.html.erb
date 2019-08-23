@@ -33,13 +33,13 @@
     </tr>
     <tr>
       <td>
-        <%= @priceList.number_of_pallets %>
+        <%= @data[:gross_price] %>
       </td>
       <td>
-        <%= @priceList.net_rabate %>
+        <%= @data[:gross_price_one_palette] %>
       </td>
       <td>
-        <%= @priceList.net_logistic %>
+        <%= @data[:transport_for_client] %>
       </td>
     </tr>
 </table>
