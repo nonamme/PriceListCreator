@@ -88,7 +88,7 @@ price_lists = PriceList.create([
 {
     number_of_pallets: 4,
     net_rabate: 20.00,
-    net_logistic: 139.0,
+    net_logistic: 139.23,
     area: areas.first
 },
 {
