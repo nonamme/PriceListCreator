@@ -62,3 +62,4 @@ add_area_button.addEventListener('click', (event) ->
   area_id++
   areas.insertAdjacentHTML("afterBegin", areaStructure.replace("area_number", "area_" + area_id))
 )
+
