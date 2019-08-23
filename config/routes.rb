@@ -6,5 +6,4 @@ Rails.application.routes.draw do
 
   delete 'warehouse/destroy/:id', :to => "warehouses#delete", as: :warehouse_destroy
   get 'warehouse/search', :to => "warehouses#search", as: :warehouse_search
-  get 'warehouse/pricing', :to => "warehouses#pricing", as: :warehouse_pricing
 end
