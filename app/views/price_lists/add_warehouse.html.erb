@@ -1,8 +1,30 @@
 <h1>Dodaj magazyn</h1>
+<%= form_with(url: create_warehouse_path, method: "post", :id => "create_warehouse", local: true) do |t| %>
 <table id="warehouse_details">
-  <tr><td>Nazwa dostawcy</td><td><input type="text"></td><td>Cena brutto</td><td><input type="text"></td><td>Opłata paleta</td><td><input type="text"></td></tr>
-  <tr><td>Nazwa magazynu</td><td><input type="text"></td><td>Transport suma 24 PAL</td><td><input type="text"></td><td>Opłata zamówienie</td><td><input type="text"></td></tr>
-  <tr><td>Nazwa produktu</td><td><input type="text"></td><td>Cena pelletu na tonę</td><td><input type="text"></td><td>Cena worka</td><td><input type="text"></td></tr>
+  <tr>
+    <td>Nazwa dostawcy</td>
+    <td><%= t.text_field :supplier_name %></td>
+    <td>Cena brutto</td>
+    <td><%= t.text_field :gross_price %></td>
+    <td>Opłata paleta</td>
+    <td><%= t.text_field :palette_charge %></td>
+  </tr>
+  <tr>
+    <td>Nazwa magazynu</td>
+    <td><%= t.text_field :warehouse_name %></td>
+    <td>Transport suma 24 PAL</td>
+    <td><%= t.text_field :transport_24_palettes %></td>
+    <td>Opłata zamówienie</td>
+    <td><%= t.text_field :order_charge %></td>
+  </tr>
+  <tr>
+    <td>Nazwa produktu</td>
+    <td><%= t.text_field :product_name %></td>
+    <td>Cena pelletu na tonę</td>
+    <td><%= t.text_field :pellet_price_per_tone %></td>
+    <td>Cena worka</td>
+    <td><%= t.text_field :bag_price %></td>
+  </tr>
 </table>
 
 <%= button_tag "Dodaj strefe", :id => :add_area, type: "button" %>
@@ -11,4 +33,10 @@
 
 
 <br>
-<%= button_tag "Dodaj magazyn", id: "add_warehouse", type: "button" %>
+<%= t.submit "Dodaj magazyn", id: "add_warehouse" %>
+<% end %>
+<%= tag.br %>
+<%= tag.br %>
+<%= tag.br %>
+
+<%= link_to "Back", root_path %>
