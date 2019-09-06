@@ -1,0 +1,45 @@
+<h3>Numer strefy</h3>
+<% f = locals[:form] %>
+<% area_number = locals[:area].number %>
+<%= f.text_field :number, value: area_number, readonly: true %>
+<h3>Kody pocztowe(odzielone średnikiem)</h3>
+<%= f.text_area "areas[#{area_number}][post_codes]", :value => locals[:area].post_codes, class: "post_codes_area" %>
+<table id='area' class='area_number'>
+  <tr><th>Ilość palet</th><th>Rabat netto</th><th>Logistyka netto</th></tr>
+  <tr>
+    <td><%= f.text_field "areas[#{area_number}][1][number_of_pallets]", :value => 1, readonly: true %></td>
+    <% first_price_list =  locals[:area].price_list.first%>
+    <td><%= f.text_field "areas[#{area_number}][1][net_rabate]", :value =>  first_price_list ? first_price_list.net_rabate : 0.0 %></td>
+    <td><%= f.text_field "areas[#{area_number}][1][net_logistic]", :value => first_price_list ? first_price_list.net_logistic : 0.0 %></td>
+  </tr>
+  <tr>
+    <td><%= f.text_field "areas[#{area_number}][2][number_of_pallets]", :value => 2, readonly: true %></td>
+    <% second_price_list =  locals[:area].price_list.second %>
+    <td><%= f.text_field "areas[#{area_number}][2][net_rabate]", :value => second_price_list ? second_price_list.net_rabate : 0.0 %></td>
+    <td><%= f.text_field "areas[#{area_number}][2][net_logistic]", :value => second_price_list ? second_price_list.net_logistic : 0.0 %></td>
+  </tr>
+  <tr>
+    <td><%= f.text_field "areas[#{area_number}][3][number_of_pallets]", :value => 3, readonly: true %></td>
+    <% third_price_list =  locals[:area].price_list.third %>
+    <td><%= f.text_field "areas[#{area_number}][3][net_rabate]", :value => third_price_list ? third_price_list.net_rabate : 0.0 %></td>
+    <td><%= f.text_field "areas[#{area_number}][3][net_logistic]", :value => third_price_list ? third_price_list.net_logistic : 0.0 %></td>
+  </tr>
+  <tr>
+    <td><%= f.text_field "areas[#{area_number}][4][number_of_pallets]", :value => 4, readonly: true %></td>
+    <% fourth_price_list =  locals[:area].price_list.fourth %>
+    <td><%= f.text_field "areas[#{area_number}][4][net_rabate]", :value => fourth_price_list ? fourth_price_list.net_rabate : 0.0 %></td>
+    <td><%= f.text_field "areas[#{area_number}][4][net_logistic]", :value => fourth_price_list ? fourth_price_list.net_logistic : 0.0 %></td>
+  </tr>
+  <tr>
+    <td><%= f.text_field "areas[#{area_number}][5][number_of_pallets]", :value => 5, readonly: true %></td>
+    <% fifth_price_list =  locals[:area].price_list.fifth %>
+    <td><%= f.text_field "areas[#{area_number}][5][net_rabate]", :value => fifth_price_list ? fifth_price_list.net_rabate : 0.0 %></td>
+    <td><%= f.text_field "areas[#{area_number}][5][net_logistic]", :value => fifth_price_list ? fifth_price_list.net_logistic : 0.0 %></td>
+  </tr>
+  <tr>
+    <td><%= f.text_field "areas[#{area_number}][6][number_of_pallets]", :value => 6, readonly: true %></td>
+    <% sixth_price_list =  locals[:area].price_list[5] %>
+    <td><%= f.text_field "areas[#{area_number}][6][net_rabate]", :value => sixth_price_list ? sixth_price_list.net_rabate : 0.0 %></td>
+    <td><%= f.text_field "areas[#{area_number}][6][net_logistic]", :value => sixth_price_list ? sixth_price_list.net_logistic : 0.0 %></td>
+  </tr>
+</table>
