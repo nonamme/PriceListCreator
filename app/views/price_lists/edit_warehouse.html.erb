@@ -1,1 +1,44 @@
-<h1>Edit warehouse</h1>
+<h1>Edytuj magazyn</h1>
+<%= form_with(url: update_warehouse_path, method: "put", :id => "create_warehouse", local: true) do |t| %>
+  <table id="warehouse_details">
+    <tr>
+      <td>Nazwa dostawcy</td>
+      <td><%= t.text_field "warehouse[supplier]", :value => @warehouse.supplier %></td>
+      <td>Cena brutto</td>
+      <td><%= t.text_field "warehouse_details[gross_price]", :value => @warehouse.warehouse_detail.gross_price %></td>
+      <td>Opłata paleta</td>
+      <td><%= t.text_field "warehouse_details[palette_price]", :value => @warehouse.warehouse_detail.palette_price %></td>
+    </tr>
+    <tr>
+      <td>Nazwa magazynu</td>
+      <td><%= t.text_field "warehouse[warehouse_name]", :value => @warehouse.warehouse_name %></td>
+      <td>Transport suma 24 PAL</td>
+      <td><%= t.text_field "warehouse_details[sum_24_pal]", :value => @warehouse.warehouse_detail.sum_24_pal %></td>
+      <td>Opłata zamówienie</td>
+      <td><%= t.text_field "warehouse_details[order_price]", :value => @warehouse.warehouse_detail.order_price %></td>
+    </tr>
+    <tr>
+      <td>Nazwa produktu</td>
+      <td><%= t.text_field "warehouse[product]", :value => @warehouse.product %></td>
+      <td>Cena pelletu na tonę</td>
+      <td><%= t.text_field "warehouse_details[price_pellete_per_tone]", :value => @warehouse.warehouse_detail.price_pellete_per_tone %></td>
+      <td>Cena worka</td>
+      <td><%= t.text_field "warehouse_details[bag_price]", :value => @warehouse.warehouse_detail.bag_price %></td>
+    </tr>
+  </table>
+
+  <div id="areas">
+    <% @warehouse.area.each do |area| %>
+      <%= render 'partials/area', :collection => area, :locals => { :area => area, :form => t} %>
+    <% end %>
+  </div>
+
+
+  <br>
+  <%= t.submit "Aktualizuj magazyn", id: "add_warehouse" %>
+<% end %>
+<%= tag.br %>
+<%= tag.br %>
+<%= tag.br %>
+
+<%= link_to "Back", root_path %>
