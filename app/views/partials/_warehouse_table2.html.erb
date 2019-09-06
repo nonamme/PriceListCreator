@@ -7,7 +7,7 @@
       <td><%= warehouse.warehouse_detail.gross_price %></td>
       <td><%= warehouse.warehouse_detail.price_pellete_per_tone %></td>
       <td><%= warehouse.warehouse_detail.order_price %></td>
-      <td><%= link_to "Edytuj", root_path %></td>
+      <td><%= link_to "Edytuj", edit_warehouse_path(warehouse.id) %></td>
       <td><%= link_to "Usun", warehouse_destroy_path(warehouse.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
     </tr>
   <% end %>
