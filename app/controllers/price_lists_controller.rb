@@ -64,7 +64,7 @@ class PriceListsController < ApplicationController
       a.price_list.each_with_index do |price_list, index|
         b = PriceList.find(price_list.id)
         b.update net_rabate: area.second["#{index + 1}"][:net_rabate], net_logistic: area.second["#{index + 1}"][:net_logistic]
-      end
+      end unless area_params.nil?
     end
 
     redirect_to root_path
