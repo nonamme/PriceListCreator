@@ -64,8 +64,8 @@ class PriceListsController < ApplicationController
       a.price_list.each_with_index do |price_list, index|
         b = PriceList.find(price_list.id)
         b.update net_rabate: area.second["#{index + 1}"][:net_rabate], net_logistic: area.second["#{index + 1}"][:net_logistic]
-      end unless area_params.nil?
-    end
+      end
+    end unless area_params.nil?
 
     redirect_to root_path
   end
@@ -80,7 +80,7 @@ class PriceListsController < ApplicationController
     end
 
     def area_params
-      params.require(:areas).permit!
+      params.require(:areas).permit! unless params[:areas].nil?
     end
 
     # def price_list_params
