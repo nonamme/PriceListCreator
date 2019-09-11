@@ -42,7 +42,6 @@ class PriceListsController < ApplicationController
     redirect_to root_path
   end
 
-
   def editWarehouse
     @warehouse = Warehouse.find(params[:id])
     render 'edit_warehouse'
@@ -55,16 +54,13 @@ class PriceListsController < ApplicationController
     wd = WarehouseDetail.where(warehouse: w).first
     wd.update warehouse_details_params
 
-
-
     area_params.each do |area|
-      a = Area.where(warehouse: w).where(id: area.first.to_i).first
-      a.update post_codes: area.second[:post_codes]
-
+      a = Area.where(warehouse: w).where(number: area.first.to_i).first
+      a.update post_codes: area.second[:post_codes] unless a.nil?
       a.price_list.each_with_index do |price_list, index|
         b = PriceList.find(price_list.id)
         b.update net_rabate: area.second["#{index + 1}"][:net_rabate], net_logistic: area.second["#{index + 1}"][:net_logistic]
-      end
+      end unless a.nil?
     end unless area_params.nil?
 
     redirect_to root_path
@@ -82,8 +78,4 @@ class PriceListsController < ApplicationController
     def area_params
       params.require(:areas).permit! unless params[:areas].nil?
     end
-
-    # def price_list_params
-    #   params.require(:price_list).permit!
-    # end
 end
