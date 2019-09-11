@@ -8,20 +8,21 @@ class WarehousesController < ApplicationController
   end
 
   def search
+    @data = []
+    @warehouses = []
     Warehouse.where("product = '#{params[:product]}'").find_each do |warehouse|
       Area.where("warehouse_id = #{warehouse.id} and post_codes like '%#{params[:postcode]}%'").find_each do |area|
         PriceList.where("area_id = #{area.id} and number_of_pallets = #{params[:number_of_palette]}").find_each do |priceList|
           puts "Warehouse  #{warehouse} Area: #{area} PriceList #{priceList}"
-          @warehouse = warehouse
+          @warehouses.push warehouse
           number_of_palettes = params[:number_of_palette]
-          @data = getComputedData priceList, warehouse, number_of_palettes
-
-          respond_to do |format|
-            respondHtml format
-            respondJson format, { warehouse: warehouse, area: area, priceList: priceList }
-          end
+          @data.push(getComputedData(priceList, warehouse, number_of_palettes))
         end
       end
+    end
+    respond_to do |format|
+      respondHtml format
+      respondJson format, { data: @data }
     end
   end
 
@@ -33,11 +34,7 @@ class WarehousesController < ApplicationController
 
   def respondJson(format, **data)
     format.json do
-      render json: {
-          warehouse: data[:warehouse],
-          area: data[:area],
-          priceList: data[:priceList]
-      }
+      render json: data
     end
   end
 
