@@ -1,12 +1,14 @@
 <table id="warehouses">
   <tr><th>Warehouse</th><th>Product</th><th>Cena brutto</th><th>Cena brutto 1 tona</th><th>Transport dla klienta</th></tr>
+  <% @warehouses.each do |warehouse| %>
     <tr>
-      <td><%= @warehouse.warehouse_name %></td>
-      <td><%= @warehouse.product %></td>
-      <td><%= @warehouse.warehouse_detail.gross_price %></td>
-      <td><%= @warehouse.warehouse_detail.price_pellete_per_tone %></td>
-      <td><%= @warehouse.warehouse_detail.order_price %></td>
+      <td><%= warehouse.warehouse_name %></td>
+      <td><%= warehouse.product %></td>
+      <td><%= warehouse.warehouse_detail.gross_price %></td>
+      <td><%= warehouse.warehouse_detail.price_pellete_per_tone %></td>
+      <td><%= warehouse.warehouse_detail.order_price %></td>
       <td><%= link_to "Edytuj", root_path %></td>
-      <td><%= link_to "Usun", warehouse_destroy_path(@warehouse.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+      <td><%= link_to "Usun", warehouse_destroy_path(warehouse.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
     </tr>
+    <% end %>
 </table>
