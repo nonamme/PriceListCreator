@@ -1,7 +1,7 @@
 <%= tag.h1 do %>
   Wyszukaj magazyn
 <% end %>
-<% if @warehouse.class == NilClass %>
+<% if @warehouses.class == NilClass %>
 <%  return flash[:error] = "No warehouse data to display." %>
 <% end %>
 <%= form_with(url: warehouse_search_path, method: "get",  :id => "search", local: true)  do %>
@@ -31,17 +31,19 @@
       <th scope="col">Cena brutto za 1 tone</th>
       <th scope="col">Transport dla klienta</th>
     </tr>
+    <% @data.each do |computes| %>
     <tr>
       <td>
-        <%= @data[:gross_price] %>
+        <%= computes[:gross_price] %>
       </td>
       <td>
-        <%= @data[:gross_price_one_palette] %>
+        <%= computes[:gross_price_one_palette] %>
       </td>
       <td>
-        <%= @data[:transport_for_client] %>
+        <%= computes[:transport_for_client] %>
       </td>
     </tr>
+    <% end %>
 </table>
 
 <%= tag.br %>
