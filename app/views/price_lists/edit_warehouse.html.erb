@@ -27,6 +27,8 @@
     </tr>
   </table>
 
+<%= button_tag "Dodaj strefe", :id => :add_extra_area, type: "button" %>
+  
   <div id="areas">
     <% @warehouse.area.each do |area| %>
       <%= render 'partials/area', :collection => area, :locals => { :area => area, :form => t} %>
