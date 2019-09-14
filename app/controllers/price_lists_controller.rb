@@ -57,11 +57,14 @@ class PriceListsController < ApplicationController
     area_params.each do |area|
       a = Area.where(warehouse: w).where(number: area.first.to_i).first
       a.update post_codes: area.second[:post_codes] unless a.nil?
-      a.price_list.each_with_index do |price_list, index|
-        b = PriceList.find(price_list.id)
-        b.update net_rabate: area.second["#{index + 1}"][:net_rabate], net_logistic: area.second["#{index + 1}"][:net_logistic]
-      end unless a.nil?
-    end unless area_params.nil?
+      
+      unless createAreaIfNil(area, w)
+        a.price_list.each_with_index do |price_list, index|
+          b = PriceList.find(price_list.id)
+          b.update net_rabate: area.second["#{index + 1}"][:net_rabate], net_logistic: area.second["#{index + 1}"][:net_logistic]
+        end
+      end
+    end
 
     redirect_to root_path
   end
@@ -77,5 +80,16 @@ class PriceListsController < ApplicationController
 
     def area_params
       params.require(:areas).permit! unless params[:areas].nil?
+    end
+
+    def createAreaIfNil(area, warehouse)
+      a = Area.create :number => area.first,
+          :post_codes => area.second[:postcode],
+          :warehouse => warehouse if a.nil?
+
+      6.times do |price_list_index|
+        PriceList.create net_rabate: area.second["#{price_list_index + 1}"][:rabate], net_logistic: area.second["#{price_list_index + 1}"][:logistic], area: a
+      end
+      true
     end
 end
