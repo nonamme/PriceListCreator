@@ -5,19 +5,20 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
 
   <body>
     <%= yield %>
     
-    <% if current_page?(add_warehouse_path) %>
-      <%= javascript_include_tag 'price_lists' %>
-    <% end %>
+    <%# if current_page?(add_warehouse_path) or current_page?(edit_warehouse_path(/\d+/)) %>
+      <%#= javascript_include_tag 'price_lists' %>
+    <%# end %>
 
     
-    <% if current_page?(price_list_index_path) or current_page?(root_path) %>
-      <%= javascript_include_tag 'index' %>
-    <% end %>
+    <%# if current_page?(price_list_index_path) or current_page?(root_path) %>
+      <%#= javascript_include_tag 'index' %>
+    <%# end %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>
