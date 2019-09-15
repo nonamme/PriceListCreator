@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   get 'price_list/edit/:id', :to => "price_lists#editWarehouse", as: :edit_warehouse # edit warehouse require passing warehouse id to edit
   put 'price_list/update/:id', :to => "price_lists#updateWarehouse", as: :update_warehouse
 
-  delete 'warehouse/destroy/:id', :to => "warehouses#delete", as: :warehouse_destroy
+  get 'warehouse/destroy/:id', :to => "warehouses#delete", as: :warehouse_destroy
   get 'warehouse/search', :to => "warehouses#search", as: :warehouse_search
 end
