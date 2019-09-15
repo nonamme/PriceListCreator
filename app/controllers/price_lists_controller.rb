@@ -58,11 +58,14 @@ class PriceListsController < ApplicationController
       a = Area.where(warehouse: w).where(number: area.first.to_i).first
       a.update post_codes: area.second[:post_codes] unless a.nil?
       
-      unless createAreaIfNil(area, w)
-        a.price_list.each_with_index do |price_list, index|
-          b = PriceList.find(price_list.id)
-          b.update net_rabate: area.second["#{index + 1}"][:net_rabate], net_logistic: area.second["#{index + 1}"][:net_logistic]
-        end
+      if a.nil?
+        createAreaIfNil(area, w) 
+        return
+      end
+      
+      a.price_list.each_with_index do |price_list, index|
+        b = PriceList.find(price_list.id)
+        b.update net_rabate: area.second["#{index + 1}"][:net_rabate], net_logistic: area.second["#{index + 1}"][:net_logistic]
       end
     end
 
@@ -90,6 +93,6 @@ class PriceListsController < ApplicationController
       6.times do |price_list_index|
         PriceList.create net_rabate: area.second["#{price_list_index + 1}"][:rabate], net_logistic: area.second["#{price_list_index + 1}"][:logistic], area: a
       end
-      true
+      redirect_to root_path
     end
 end
