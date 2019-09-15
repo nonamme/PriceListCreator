@@ -62,9 +62,9 @@ class PriceListsController < ApplicationController
         createAreaIfNil(area, w) 
         return
       end
-      
+
       a.price_list.each_with_index do |price_list, index|
-        b = PriceList.find(price_list.id)
+        b = PriceList.where(id: price_list.id).where(area: a) # find price by area
         b.update net_rabate: area.second["#{index + 1}"][:net_rabate], net_logistic: area.second["#{index + 1}"][:net_logistic]
       end
     end
