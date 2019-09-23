@@ -26,19 +26,19 @@ class PriceListsController < ApplicationController
 
     params[:areas].each do |area|
       a = Area.create(
-          :number => area[0][-1],
+          :number => area[0][-1], 
           :post_codes => area[1][:postcode],
           warehouse: w)
       area[1].each do |k, v|
-        pl = PriceList.create(
+        PriceList.create(
             :number_of_pallets => k,
-            :net_rabate => v[:rabate],
-            :net_logistic => v[:logistic],
+            :net_rabate => v[:net_rabate],
+            :net_logistic => v[:net_logistic],
             :area => a
-        ) unless k.eql? "postcode"
+        ) unless k.eql? "postcode" 
       end
-    end
-
+    end 
+    
     redirect_to root_path
   end
 
@@ -54,18 +54,22 @@ class PriceListsController < ApplicationController
     wd = WarehouseDetail.where(warehouse: w).first
     wd.update warehouse_details_params
 
+    pp params
+
     area_params.each do |area|
-      a = Area.where(warehouse: w).where(number: area.first.to_i).first
+      a = Area.where(warehouse: w).where(number: area[0][-1].to_i).first
       a.update post_codes: area.second[:post_codes] unless a.nil?
       
       if a.nil?
         createAreaIfNil(area, w) 
         return
-      end
+      else
 
-      a.price_list.each_with_index do |price_list, index|
-        b = PriceList.where(id: price_list.id).where(area: a) # find price by area
-        b.update net_rabate: area.second["#{index + 1}"][:net_rabate], net_logistic: area.second["#{index + 1}"][:net_logistic]
+        a.price_list.each_with_index do |price_list, index|
+          b = PriceList.where(id: price_list.id).where(area: a) 
+          b.update net_rabate: area.second["#{index + 1}"][:net_rabate], net_logistic: area.second["#{index + 1}"][:net_logistic]
+          createPriceListIfNil(area, index) if b.nil?
+        end
       end
     end
 
@@ -86,13 +90,19 @@ class PriceListsController < ApplicationController
     end
 
     def createAreaIfNil(area, warehouse)
-      a = Area.create :number => area.first,
+      a = Area.create :number => area[0][-1],
           :post_codes => area.second[:postcode],
           :warehouse => warehouse if a.nil?
 
       6.times do |price_list_index|
-        PriceList.create net_rabate: area.second["#{price_list_index + 1}"][:rabate], net_logistic: area.second["#{price_list_index + 1}"][:logistic], area: a
+        PriceList.create number_of_pallets: price_list_index + 1, net_rabate: area.second["#{price_list_index + 1}"][:net_rabate], net_logistic: area.second["#{price_list_index + 1}"][:net_logistic], area: a
       end
       redirect_to root_path
+    end
+
+    def createPriceListIfNil(area, index)
+      PriceList.create number: area[0][-1],
+                       net_rabate: area.second["#{index + 1}"][:net_rabate],
+                       net_logistic: area.second["#{index + 1}"][:net_logistic]
     end
 end
