@@ -8,9 +8,7 @@ input_fileds = [
   number_of_pallete_input
 ]
 
-add_event_to_filed = (field) ->
-  field.addEventListener("keyup", (event) ->
-    alert "Clicked " + event
-  )
+# add_event_to_filed = (field) ->
 
-add_event_to_filed field for field in input_fileds
+
+# add_event_to_filed field for field in input_fileds
